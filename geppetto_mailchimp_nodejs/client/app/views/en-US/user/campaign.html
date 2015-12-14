@@ -1,0 +1,200 @@
+<header class="user" ng-include="'app/views/en-US/header.html'"></header>
+<div class="project">
+	<h1 class="title">Manage Campaign</h1>
+	<tabset class="tabs"> <tab heading="General Information">
+	<form name="campaignForm" novalidate="novalidate">
+		<div class="general">
+			<div class="properties">
+				<div class="item">
+					<label for="title">Title</label> <input style="width: 100%;"
+						type="text" class="form-control" id="title" name="title"
+						placeholder="Enter the title" ng-model="campaign.campaignTitle"
+						required="required"><span
+						ng-show="campaignForm.title.$dirty && campaignForm.title.$error"
+						style="color: red;"><span
+						ng-show="campaignForm.title.$error.required">Title is
+							required!</span></span>
+				</div>
+				<div class="item">
+					<label for="label">Label</label> <input style="width: 100%;"
+						type="text" class="form-control" id="label" name="label"
+						placeholder="Enter the label" ng-model="campaign.campaignLabel"
+						required="required"><span
+						ng-show="campaignForm.label.$dirty && campaignForm.label.$error"
+						style="color: red;"><span
+						ng-show="campaignForm.label.$error.required">Label is
+							required!</span></span>
+				</div>
+				<div class="item">
+					<label for="description">Description</label> <input
+						style="width: 100%;" type="text" class="form-control"
+						id="description" name="description"
+						placeholder="Enter the description"
+						ng-model="campaign.campaignDescription" required="required"><span
+						ng-show="campaignForm.description.$dirty && campaignForm.description.$error"
+						style="color: red;"><span
+						ng-show="campaignForm.description.$error.required">Description
+							is required!</span></span>
+				</div>
+				<div class="item">
+					<label for="emailsubject">Email Subject</label> <input
+						style="width: 100%;" type="text" class="form-control"
+						id="emailsubject" name="emailsubject"
+						placeholder="Enter the email subject"
+						ng-model="template.emailSubject" required="required"><span
+						ng-show="campaignForm.emailsubject.$dirty && campaignForm.emailsubject.$error"
+						style="color: red;"><span
+						ng-show="campaignForm.emailsubject.$error.required">Email
+							subject is required!</span></span>
+				</div>
+				<div class="item">
+					<label for="appname">Application Name</label> <input
+						style="width: 100%;" type="text" class="form-control" id="appname"
+						name="appname" placeholder="Enter the application name"
+						ng-model="template.appName" required="required"><span
+						ng-show="campaignForm.appname.$dirty && campaignForm.appname.$error"
+						style="color: red;"><span
+						ng-show="campaignForm.appname.$error.required">Application
+							name is required!</span></span>
+				</div>
+				<div class="item">
+					<label for="emailaddress">Email Address</label> <input
+						style="width: 100%;" type="text" class="form-control"
+						id="emailaddress" name="emailaddress"
+						placeholder="Enter the from email address"
+						ng-model="template.emailAddress"
+						data-ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
+						required="required"><span
+						ng-show="campaignForm.emailaddress.$dirty && campaignForm.emailaddress.$error"
+						style="color: red;"><span
+						ng-show="campaignForm.emailaddress.$error.required">Email
+							address is required!</span><span
+						ng-show="campaignForm.emailaddress.$error.pattern">Invalid
+							email!</span></span>
+				</div>
+				<div class="item">
+					<label for="newtemplate">New Email Template</label> <select
+						style="width: 100%;" class="form-control" id="newtemplate"
+						name="newtemplate" ng-model="template.baseTemplateId"
+						ng-change="pickNewTemplate(template.baseTemplateId)"
+						ng-disabled="campaign.emailTemplate != ''" required="required">
+						<option value="" selected="selected">Select the Email
+							Template</option>
+						<option ng-repeat="baseTemplate in baseTemplatesList"
+							value="{{baseTemplate.templateSno}}">{{baseTemplate.templateName}}</option>
+					</select>
+				</div>
+				<div class="item">
+					<label for="existingtemplate">Existing Email Template</label> <select
+						style="width: 100%;" id="existingtemplate" class="form-control"
+						name="existingtemplate" ng-model="template.templateSno"
+						ng-change="pickExistingTemplate(template.templateSno)"
+						ng-disabled="campaign.emailTemplate != ''" required="required">
+						<option value="" selected="selected">Select the Email
+							Template</option>
+						<option ng-repeat="existingTemplate in templatesList"
+							value="{{existingTemplate.templateSno}}">{{existingTemplate.templateName}}</option>
+					</select>
+				</div>
+				<div class="item">
+					<label for="templatename">Template Name</label> <input
+						style="width: 100%;" type="text" class="form-control"
+						id="templatename" name="templatename"
+						placeholder="Enter the template name"
+						ng-model="template.templateName" required="required"><span
+						ng-show="campaignForm.templatename.$dirty && campaignForm.templatename.$error"
+						style="color: red;"><span
+						ng-show="campaignForm.templatename.$error.required">Template
+							name is required!</span></span>
+				</div>
+			</div>
+			<hr>
+			<accordion> <accordion-group heading="Edit the Template"
+				is-open="true">
+			<div class="general">
+				<div class="properties">
+					<div class="item">
+						<label for="bodyheader">Body Header</label> <input
+							style="width: 100%;" type="text" class="form-control"
+							id="bodyheader" name="bodyheader"
+							placeholder="Enter the body header"
+							ng-model="template.bodyHeader" required="required"><span
+							ng-show="campaignForm.bodyheader.$dirty && campaignForm.bodyheader.$error"
+							style="color: red;"><span
+							ng-show="campaignForm.bodyheader.$error.required">Body
+								Header is required!</span></span>
+					</div>
+					<div class="item">
+						<label for="bodyheadersub">Body Header Subject</label> <input
+							style="width: 100%;" type="text" class="form-control"
+							id="bodyheadersub" name="bodyheadersub"
+							placeholder="Enter the body header subject"
+							ng-model="template.bodySubject" required="required"><span
+							ng-show="campaignForm.bodyheadersub.$dirty && campaignForm.bodyheadersub.$error"
+							style="color: red;"><span
+							ng-show="campaignForm.bodyheadersub.$error.required">Body
+								Header Subject is required!</span></span>
+					</div>
+					<div class="item">
+						<label for="bodyfooter">Body Footer</label> <input
+							style="width: 100%;" type="text" class="form-control"
+							id="bodyfooter" name="bodyfooter"
+							placeholder="Enter the body footer"
+							ng-model="template.bodyFooter" required="required"><span
+							ng-show="campaignForm.bodyfooter.$dirty && campaignForm.bodyfooter.$error"
+							style="color: red;"><span
+							ng-show="campaignForm.bodyfooter.$error.required">Body
+								Footer is required!</span></span>
+					</div>
+				</div>
+				<label for="bodycontent">Body Content</label>
+				<textarea data-ck-editor id="bodycontent" name="bodycontent"
+					ng-model="template.bodyContent" placeholder="Enter the body 1"
+					required="required"></textarea>
+				<span
+					ng-show="campaignForm.bodycontent.$dirty && campaignForm.bodycontent.$error"
+					style="color: red;"><span
+					ng-show="campaignForm.bodycontent.$error.required">Body
+						Content is required!</span></span>
+			</div>
+			</accordion-group> <accordion-group heading="List of Subscribers" class="architecture">
+			<div class="properties">
+				<h3 class="title lead">List of Subscribers</h3>
+				<div ui-grid="gridOptions" ui-grid-edit ui-grid-pagination
+					ui-grid-resize-columns class="table"></div>
+			</div>
+			<button class="btn btn-success" ng-click="addNewRow()">Add
+				New Row</button>
+			<button class="btn btn-info"
+				ng-disabled="subscribersList.length == 0 || subscribersList.length > 5"
+				ng-click="createSubscribers()">Create Subscribers</button>
+			</accordion-group></accordion>
+		</div>
+		<hr>
+		<div class="action">
+			<button ng-show="CampaignBtn" class="btn btn-info"
+				ng-click="createCampaign()"
+				ng-disabled="campaign.campaignSno != '' || campaignForm.title.$pristine || campaignForm.label.$pristine || 
+			campaignForm.description.$pristine || campaignForm.emailsubject.$pristine || campaignForm.emailaddress.$pristine ||
+			campaignForm.appname.$pristine || campaignForm.templatename.$pristine || campaignForm.bodyheader.$pristine ||
+			campaignForm.bodyheadersub.$pristine || campaignForm.bodyfooter.$pristine || campaignForm.bodycontent.$pristine ||
+			campaignForm.title.$dirty && campaignForm.title.$invalid || campaignForm.label.$dirty && campaignForm.label.$invalid ||
+			campaignForm.description.$dirty && campaignForm.description.$invalid || campaignForm.emailsubject.$dirty &&
+			campaignForm.emailsubject.$invalid || campaignForm.appname.$dirty && campaignForm.appname.$invalid ||
+			campaignForm.emailaddress.$dirty && campaignForm.emailaddress.$invalid || campaignForm.templatename.$dirty &&
+			campaignForm.templatename.$invalid || campaignForm.bodyheader.$invalid && campaignForm.bodyheader.$dirty ||
+			campaignForm.bodyheadersub.$invalid && campaignForm.bodyheadersub.$dirty || campaignForm.bodyfooter.$invalid &&
+			campaignForm.bodyfooter.$dirty || campaignForm.bodycontent.$invalid && campaignForm.bodycontent.$dirty">Create
+				Campaign</button>
+			<button ng-hide="CampaignBtn" class="btn btn-info"
+				ng-click="updateCampaign()">Update Campaign</button>
+			<button class="btn btn-info" ng-disabled="campaign.campaignSno == ''"
+				ng-click="sendTestEmail('sm')">Send Test Email</button>
+			<button class="btn complete"
+				ng-click="sendSMTPEmail()">Send Campaign</button> <!--ng-disabled="campaign.campaignSno == '' || pickedSubscribers == ''"  -->
+			<button class="btn danger" ng-click="goBack()">Go Back</button>
+		</div>
+	</form>
+	</tab> </tabset>
+</div>
+<footer ng-include="'app/views/en-US/footer.html'"></footer>

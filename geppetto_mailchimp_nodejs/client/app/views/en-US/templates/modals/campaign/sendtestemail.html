@@ -1,0 +1,27 @@
+<div class="modal-header">
+	<h1 class="modal-title lead">Send test email</h1>
+</div>
+<div class="modal-body">
+	<form class="create" name="sendtestemailForm">
+		<div class="form-group">
+			<label for="testemail">Email</label> <input type="text"
+				class="form-control" id="testemail" name="testemail"
+				placeholder="Enter the email" ng-model="modalData.email"
+				ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
+				required="required" autofocus="autofocus"><span
+				ng-show="sendtestemailForm.testemail.$dirty && sendtestemailForm.testemail.$error"
+				style="color: red;"><span
+				ng-show="sendtestemailForm.testemail.$error.required">Email
+					is required!</span><span
+				ng-show="sendtestemailForm.testemail.$error.pattern">Invalid
+					email!</span></span>
+		</div>
+	</form>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-primary"
+		ng-disabled="sendtestemailForm.testemail.$pristine ||
+	sendtestemailForm.testemail.$dirty && sendtestemailForm.testemail.$invalid"
+		ng-click="ok()">Send</button>
+	<button class="btn btn-default" ng-click="close()">Cancel</button>
+</div>

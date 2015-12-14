@@ -1,0 +1,30 @@
+<header ng-include="'app/views/en-US/header.html'"></header>
+<div class="projects" style="min-height: 350px;">
+	<div class="add">
+		<button class="btn complete" ng-click="addNewCampaign()">
+			<i class="fa fa-plus-circle"></i> <span>Add Campaign</span>
+		</button><!-- &nbsp;
+		<button class="btn complete" ng-click="gotoSendEmail()">
+			<i class="fa fa-paper-plane"></i> <span>Send Email</span>
+		</button> -->
+	</div>
+	<ul>
+		<li ng-repeat="campaign in campaignsList"
+			id="{{campaign.campaignSno}}">
+			<h3 class="title lead">{{campaign.campaignTitle}}</h3>
+			<h4 class="label">{{campaign.campaignLabel}}</h4>
+			<p class="description">{{campaign.campaignDescription}}</p>
+			<div class="action">
+				<button class="btn success edit"
+					ng-click="editExistingCampaign(campaign.campaignSno)">
+					<i class="fa fa-pencil-square-o"></i> <span>Edit</span>
+				</button>
+				<button class="btn danger delete"
+					ng-click="openDeleteDialog(campaign.campaignSno)">
+					<i class="fa fa-trash-o"></i> <span>Delete</span>
+				</button>
+			</div>
+		</li>
+	</ul>
+</div>
+<footer ng-include="'app/views/en-US/footer.html'"></footer>
